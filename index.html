@@ -23,32 +23,51 @@
     </header>
 
     <div id="main" class="card card-body">
-      <h2 class="title">Add Items</h2>
-      <form id="addForm" class="form-inline">
-        <input type="text" class="form-control" id="item" />
-        <input type="submit" class="btn btn-dark" value="Submit" />
-      </form>
-      <h2 class="title">Items</h2>
-      <ul id="items" class="list-group">
-        <li class="list-group-item">
-          Item 1
-          <button class="btn btn-danger btn-sm float-right delete">X</button>
-        </li>
-        <li class="list-group-item">
-          Item 2
-          <button class="btn btn-danger btn-sm float-right delete">X</button>
-        </li>
-        <li class="list-group-item">
-          Item 3
-          <button class="btn btn-danger btn-sm float-right delete">X</button>
-        </li>
-        <li class="list-group-item">
-          Item 4
-          <button class="btn btn-danger btn-sm float-right delete">X</button>
-        </li>
-      </ul>
-    </div>
+      <div class="controls">
+        <div id="addItems">
+          <h2 class="title">Add Items</h2>
+          <form id="addForm" class="form-inline">
+            <input type="text" class="form-control" id="item" />
+            <input type="submit" class="btn btn-dark" value="Submit" />
+          </form>
+        </div>
 
+        <buttton id="newList" class="btn btn-dark">+ Neue Liste</buttton>
+      </div>
+
+      <div class="content">
+        <div class="tab">
+          <button class="tablinks btn btn-outline-dark">Items</button>
+        </div>
+
+        <ul id="items" class="tabcontent list-group">
+          <li class="list-group-item">
+            Item 1
+            <button class="btn btn-danger btn-sm float-right delete">
+              X
+            </button>
+          </li>
+          <li class="list-group-item">
+            Item 2
+            <button class="btn btn-danger btn-sm float-right delete">
+              X
+            </button>
+          </li>
+          <li class="list-group-item">
+            Item 3
+            <button class="btn btn-danger btn-sm float-right delete">
+              X
+            </button>
+          </li>
+          <li class="list-group-item">
+            Item 4
+            <button class="btn btn-danger btn-sm float-right delete">
+              X
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
     <p id="video-link">
       <a href="https://youtu.be/i37KVt_IcXw"
         >Link zum Video von Brad Traversy</a

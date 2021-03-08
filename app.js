@@ -1,4 +1,27 @@
-// ADD ITEM TO THE LIST
+let activeList = document.querySelector(".list-group");
+activeList.classList.add("active");
+
+// ADD A NEW LIST
+
+document.querySelector("#newList").addEventListener("click", addList);
+
+function addList() {
+  const listName = prompt("Name der neuen Liste:", "Einkaufen");
+
+  //erstelle den Tab-Button
+  const tabButton = document.createElement("button");
+  tabButton.classList = "tablinks btn btn-outline-dark";
+  tabButton.innerHTML = listName;
+  document.querySelector(".tab").appendChild(tabButton);
+
+  //erstelle den Listen-Container
+  const ul = document.createElement("ul");
+  ul.classList = "tabcontent list-group";
+  ul.id = listName.toLowerCase();
+  document.querySelector(".content").appendChild(ul);
+}
+
+// ADD ITEM TO THE ACTIVE LIST
 const form = document.querySelector("#addForm");
 form.addEventListener("submit", addItem);
 
@@ -22,8 +45,8 @@ function addItem(event) {
   //hänge den deleteBtn als Kind in das List-Item
   li.appendChild(deleteBtn);
 
-  //hänge das List-Item an die Liste an
-  document.querySelector("#items").appendChild(li);
+  //hänge das List-Item an die aktive Liste an
+  activeList.appendChild(li);
 }
 
 //DELETE ITEM FROM LIST
@@ -33,12 +56,10 @@ itemList.addEventListener("click", deleteItem);
 function deleteItem(event) {
   //falls der angeglickte Bereich der X-Button ist:
   if (event.target.classList.contains("delete")) {
-    if (confirm("Element löschen?")) {
-      // wähle das Elternelement des Buttons:
-      const li = event.target.parentElement;
-      //entferne es aus dem DOM:
-      li.remove();
-    }
+    // wähle das Elternelement des Buttons:
+    const li = event.target.parentElement;
+    //entferne es aus dem DOM:
+    li.remove();
   }
 }
 
@@ -64,4 +85,34 @@ function filterItems(event) {
       item.style.display = "none";
     }
   });
+}
+
+//TAB NAVIGATION
+document.querySelector(".tab").addEventListener("click", openTab);
+
+function openTab(event) {
+  if (event.target.classList.contains("tablinks")) {
+    //blende alle Tabs aus:
+    const tabcontent = document.querySelectorAll(".tabcontent");
+    tabcontent.forEach(tab => {
+      tab.style.display = "none";
+      tab.classList.remove("active");
+    });
+
+    //schalte alle Tablinks auf nicht aktiv:
+    const tablinks = document.querySelectorAll(".tablinks");
+    tablinks.forEach(tab => {
+      tab.classList.remove("btn-dark");
+      tab.classList.add("btn-outline-dark");
+    });
+
+    //aktivierten Tablink formatieren:
+    event.target.classList.remove("btn-outline-dark");
+    event.target.classList.add("btn-dark");
+
+    //richtigen Tab anzeigen:
+    activeList = document.getElementById(event.target.innerText.toLowerCase());
+    activeList.classList.add("active");
+    activeList.style.display = "block";
+  }
 }
