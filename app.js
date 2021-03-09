@@ -1,12 +1,9 @@
-let activeList = document.querySelector(".list-group");
-activeList.classList.add("active");
-
 // ADD A NEW LIST
 
 document.querySelector("#newList").addEventListener("click", addList);
 
 function addList() {
-  const listName = prompt("Name der neuen Liste:", "Einkaufen");
+  const listName = prompt("Name der neuen Liste:", "Einkaufsliste");
 
   //erstelle den Tab-Button
   const tabButton = document.createElement("button");
@@ -18,7 +15,23 @@ function addList() {
   const ul = document.createElement("ul");
   ul.classList = "tabcontent list-group";
   ul.id = listName.toLowerCase();
+  ul.addEventListener("click", deleteItem);
   document.querySelector(".content").appendChild(ul);
+
+  //simuliere einen Klick auf den Button um die neue Liste zu aktivieren:
+  tabButton.click();
+}
+
+// DELETE ACTIVE LIST
+document.querySelector("#deleteList").addEventListener("click", deleteList);
+
+function deleteList() {
+  document.querySelector(".active").remove();
+  document.querySelectorAll(".tablinks").forEach(tablink => {
+    if (tablink.classList.contains("btn-dark")) {
+      tablink.remove();
+    }
+  });
 }
 
 // ADD ITEM TO THE ACTIVE LIST
@@ -26,31 +39,35 @@ const form = document.querySelector("#addForm");
 form.addEventListener("submit", addItem);
 
 function addItem(event) {
-  //verhindere reload des Dokuments durch Submit-Button
-  event.preventDefault();
+  try {
+    //verhindere reload des Dokuments durch Submit-Button
+    event.preventDefault();
 
-  //hole Wert aus dem Input-Textfeld
-  const newItem = document.querySelector("#item").value;
+    //hole Wert aus dem Input-Textfeld
+    const newItem = document.querySelector("#item").value;
 
-  //erstelle ein neues List-Item, gib ihm eine class und weise Text zu
-  const li = document.createElement("li");
-  li.classList = "list-group-item";
-  li.innerText = newItem;
+    //erstelle ein neues List-Item, gib ihm eine class und weise Text zu
+    const li = document.createElement("li");
+    li.classList = "list-group-item";
+    li.innerText = newItem;
 
-  //erstelle den X-Button für das neue List-Item
-  const deleteBtn = document.createElement("button");
-  deleteBtn.classList = "btn btn-danger btn-sm float-right delete";
-  deleteBtn.innerText = "X";
+    //erstelle den X-Button für das neue List-Item
+    const deleteBtn = document.createElement("button");
+    deleteBtn.classList = "btn btn-danger btn-sm float-right delete";
+    deleteBtn.innerText = "X";
 
-  //hänge den deleteBtn als Kind in das List-Item
-  li.appendChild(deleteBtn);
+    //hänge den deleteBtn als Kind in das List-Item
+    li.appendChild(deleteBtn);
 
-  //hänge das List-Item an die aktive Liste an
-  activeList.appendChild(li);
+    //hänge das List-Item an die aktive Liste an
+    document.querySelector(".active").appendChild(li);
+  } catch (error) {
+    alert("Bitte wähle eine Liste aus, bzw. erstelle eine neue!");
+  }
 }
 
 //DELETE ITEM FROM LIST
-const itemList = document.querySelector("#items");
+const itemList = document.querySelector(".content");
 itemList.addEventListener("click", deleteItem);
 
 function deleteItem(event) {
@@ -95,7 +112,6 @@ function openTab(event) {
     //blende alle Tabs aus:
     const tabcontent = document.querySelectorAll(".tabcontent");
     tabcontent.forEach(tab => {
-      tab.style.display = "none";
       tab.classList.remove("active");
     });
 
@@ -111,8 +127,9 @@ function openTab(event) {
     event.target.classList.add("btn-dark");
 
     //richtigen Tab anzeigen:
-    activeList = document.getElementById(event.target.innerText.toLowerCase());
+    const activeList = document.getElementById(
+      event.target.innerText.toLowerCase()
+    );
     activeList.classList.add("active");
-    activeList.style.display = "block";
   }
 }

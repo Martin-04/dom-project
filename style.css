@@ -48,3 +48,20 @@ body {
 .tablinks:focus {
   box-shadow: none;
 }
+
+.listControls {
+  display: flex;
+  flex-direction: column;
+}
+
+.listControls button {
+  margin-bottom: 5px;
+}
+
+.list-group {
+  display: none;
+}
+
+.active {
+  display: block !important;
+}
