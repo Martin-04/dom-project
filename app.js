@@ -1,3 +1,11 @@
+//check if there's data in local storage:
+
+if (localStorage.getItem("content") !== null) {
+  document.querySelector(".content").innerHTML = localStorage.getItem(
+    "content"
+  );
+}
+
 // ADD A NEW LIST
 
 document.querySelector("#newList").addEventListener("click", addList);
@@ -132,4 +140,12 @@ function openTab(event) {
     );
     activeList.classList.add("active");
   }
+}
+
+document.addEventListener("click", save);
+document.addEventListener("keyup", save);
+
+//SAVE ALL LISTS TO LOCAL STORAGE
+function save() {
+  localStorage.setItem("content", document.querySelector(".content").innerHTML);
 }
