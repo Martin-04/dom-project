@@ -53,6 +53,7 @@ function addItem(event) {
 
     //hole Wert aus dem Input-Textfeld
     const newItem = document.querySelector("#item").value;
+    document.querySelector("#item").value = "";
 
     //erstelle ein neues List-Item, gib ihm eine class und weise Text zu
     const li = document.createElement("li");
