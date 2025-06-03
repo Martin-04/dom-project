@@ -14,9 +14,9 @@ body {
 }
 
 #main {
-  grid-area: 2 / 2;
+  grid-area: 2 / 2 ;
   display: grid;
-  grid-row-gap: 5px;
+  grid-row-gap: 10px;
 }
 
 #video-link {
@@ -43,7 +43,7 @@ body {
 }
 
 .tablinks {
-  border-radius: 0;
+  border-radius: 1px;
 }
 .tablinks:focus {
   box-shadow: none;
