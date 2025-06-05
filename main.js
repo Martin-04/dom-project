@@ -3,7 +3,7 @@ var itemList = document.getElementById("addItems");
 var filter=document.getElementById("filter");
 
 // Form submit event
-form. addEventListener("submit", addItem);
+form.addEventListener("submit", addItem);
 //Delte event
 itemList.addEventListener("click", removeItem);
 //Filter event
@@ -63,3 +63,27 @@ function filterItems(e){
         }
     })
 }
+
+// ADD A NEW LIST
+document.querySelector("#newList").addEventListener("click", addList);
+
+function addList() {
+  const listName = prompt("Name der neuen Liste:", "Einkaufsliste");
+
+  //erstelle den Tab-Button
+  const tabButton = document.createElement("button");
+  tabButton.classList = "tablinks btn btn-outline-dark";
+  tabButton.innerHTML = listName;
+  document.querySelector(".tab").appendChild(tabButton);
+
+  //erstelle den Listen-Container
+  const ul = document.createElement("ul");
+  ul.classList = "tabcontent list-group";
+  ul.id = listName.toLowerCase();
+  ul.addEventListener("click", deleteItem);
+  document.querySelector(".content").appendChild(ul);
+
+  //simuliere einen Klick auf den Button um die neue Liste zu aktivieren:
+  tabButton.click();
+}
+
